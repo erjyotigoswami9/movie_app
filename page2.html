@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <a href="index.html">Home</a>
+    <h1 style="text-align: center; margin-top: 40px;">Movie Details...</h1>
+    <!-- <button class="displayBtn">Display</button> -->
+    <div class="container2">
+        No Result ! 
+    </div>
+    <br><br><br>
+</body>
+
+</html>
+<script>
+
+var container2 = document.querySelector(".container2") ;
+   
+    if(localStorage.getItem("movieId")){
+    let id = localStorage.getItem("movieId") ;
+
+    let newUrl = `https://omdbapi.com/?apikey=788ae520&i=${id}` ;
+    fetch(newUrl)
+    .then((res)=> res.json())
+    .then((res)=>{
+        console.log(res) ;
+        
+        showDetails(res) ;
+    })
+    container2.innerHTML = "<h1>Loading....</h1>"
+   }
+   
+function showDetails(data){
+    container2.innerHTML = "" ;
+    console.log(data.DVD)
+    let div3 = document.createElement("div") ;
+    let ele = data ;
+    {
+        let img2 = document.createElement("img") ;
+        img2.src = ele.Poster ;
+        img2.setAttribute("width","900px") ;
+        img2.setAttribute("height","800px") ;
+        let title2 = document.createElement("p") ;
+        title2.innerHTML = "<b>Title  :  </b>"+ ele.Title ;
+        let year2 = document.createElement("p") ; 
+        year2.innerHTML = "<b>Year : </b>"+ ele.Released ;
+        let actors = document.createElement("p") ;
+        actors.innerHTML = "<b>Actors : </b>"+ ele.Actors ;
+        let awards = document.createElement("p") ;
+        awards.innerHTML = "<b>Awards</b>"+ ele.Awards ;
+        let boxoffice = document.createElement("p") ;
+        boxoffice.innerHTML = "<b>BoxOffice : </b>"+ ele.BoxOffice ;
+        let country = document.createElement("p") ;
+        country.innerHTML = "<b>Country : </b>"+ ele.Country ;
+        let dvd = document.createElement("p") ;
+        dvd.innerHTML = "<b>DVD : </b>"+ ele.DVD ;
+        let director = document.createElement("p") ;
+        director.innerHTML = "<b>Director : </b>"+ ele.Director ;
+        let genre = document.createElement("p") ;
+        genre.innerHTML = "<b>Genre : </b>"+ ele.Genre ;
+        let language2 = document.createElement("p") ;
+        language2.innerHTML = "<b>Language : </b>"+ ele.Language ;
+        let metaScore = document.createElement("p") ;
+        metaScore.innerHTML = "<b>MetaScore : </b>"+ ele.Metascore ;
+        let plot = document.createElement("p") ;
+        plot.innerHTML = "<b>Plot : </b>"+ ele.Plot ;
+        let rated = document.createElement("p") ;
+        rated.innerHTML = "<b>Rated : </b>"+ ele.Rated ;
+        let writers = document.createElement("p") ;
+        writers.innerHTML = "<b>Writer : </b>"+ ele.Writer ;
+        let imdbrating = document.createElement("p") ;
+        imdbrating.innerHTML = "<b>imdbRatings : </b>"+ ele.imdbRating ;
+        let imdbvote = document.createElement("p") ;
+        imdbvote.innerHTML = "<b>imdbVotes : </b>"+ ele.imdbVotes ;
+
+        div3.append(img2,title2,year2,actors,awards,boxoffice,country,dvd,director,genre,language2,metaScore,plot,rated,writers,imdbrating,imdbvote) ;
+        container2.append(div3) ;
+    }
+}
+
+</script>
